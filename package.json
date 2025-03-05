@@ -11,8 +11,6 @@
     "type-check": "vue-tsc --build"
   },
   "dependencies": {
-    "@tresjs/cientos": "^4.1.0",
-    "@tresjs/core": "^4.3.3",
     "three": "^0.174.0",
     "vue": "^3.5.13"
   },
