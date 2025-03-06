@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { onMounted, ref } from 'vue';
-import beeModel from '../../models/animbee.glb';
+import beeModel from '../../models/AnimBEE.glb';
 
 const container = ref<HTMLElement | null>(null);
 
@@ -40,7 +40,6 @@ onMounted(() => {
     model.position.x = Math.sin(elapsed) * 3;
     model.position.z = Math.cos(elapsed) * 1.5;
     model.position.y = Math.sin(elapsed * 2);
-    model.rotation.z = -(Math.sin(elapsed) / 1.5);
     renderer.render(scene, camera);
   }
   // Load a glTF resource
@@ -64,13 +63,16 @@ onMounted(() => {
       mixer = new THREE.AnimationMixer( gltf.scene );
       mixer.clipAction( gltf.animations[1] ).loop = THREE.LoopRepeat;
       mixer.clipAction( gltf.animations[1] ).play();
+      mixer.clipAction( gltf.animations[0] ).loop = THREE.LoopRepeat;
+      mixer.clipAction( gltf.animations[0] ).play();
 
-      model.rotation.y = Math.PI / 2; // Rotate the model if needed
+      model.rotation.z = -0.2;
+      model.rotation.y = Math.PI * 1.5; // Rotate the model if needed
       renderer.setAnimationLoop( animate );
     }
   );
 
-  camera.position.z = 5;
+  camera.position.z = 20;
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
